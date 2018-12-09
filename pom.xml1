@@ -46,6 +46,13 @@
     <version>5.3.6</version>
 <!--     <scope>test</scope> -->
 </dependency>
+		<!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-core-web-api -->
+<dependency>
+    <groupId>org.apereo.cas</groupId>
+    <artifactId>cas-server-core-web-api</artifactId>
+    <version>5.3.6</version>
+    <scope>runtime</scope>
+</dependency>
 		
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -75,8 +82,10 @@
 				<configuration>
 					<overlays>
 						<overlay>
-							<groupId>org.jasig.cas</groupId>
-							<artifactId>cas-server-core-webapp</artifactId>
+<!-- 							<groupId>org.jasig.cas</groupId> -->
+<!-- 							<artifactId>cas-server-core-webapp</artifactId> -->
+							<groupId>org.apereo.cas</groupId>
+    						<artifactId>cas-server-core-web</artifactId>
 						</overlay>
 					</overlays>
 				</configuration>
