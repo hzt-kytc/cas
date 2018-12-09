@@ -1,0 +1,9 @@
+{
+  "@class": "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId": "^(https|http)://kytc.*",
+  "name": "kytc",
+  "id": 100003,
+  "description": "这是一个kytc域名下的服务，通过kytc访问都允许通过",
+  "evaluationOrder": 10,
+  "theme": "kytc"
+}
