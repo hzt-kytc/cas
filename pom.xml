@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd ">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.apereo.cas</groupId>
+	<artifactId>cas-overlay</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${springboot.version}</version>
+				<configuration>
+					<mainClass>${mainClassName}</mainClass>
+					<addResources>true</addResources>
+					<executable>${isExecutable}</executable>
+					<layout>WAR</layout>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<warName>cas</warName>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<recompressZippedFiles>false</recompressZippedFiles>
+					<archive>
+						<compress>false</compress>
+						<manifestFile>${manifestFileToUse}</manifestFile>
+					</archive>
+					<overlays>
+						<overlay>
+							<groupId>org.apereo.cas</groupId>
+							<artifactId>cas-server-webapp${app.server}</artifactId>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+			</plugin>
+			<plugin>
+		          <!-- 3个可用插件 -->
+<!-- 		        <groupId>org.apache.tomcat.maven</groupId> -->
+<!-- 		        <artifactId>tomcat6-maven-plugin</artifactId>                    命令为tomcat6:redeploy -->
+		        <groupId>org.apache.tomcat.maven</groupId>
+		        <artifactId>tomcat7-maven-plugin</artifactId>    <!-- 命令为tomcat7:redeploy -->
+		        <!-- <groupId>org.codehaus.mojo</groupId> -->
+		        <!-- <artifactId>tomcat-maven-plugin</artifactId> -->        <!-- 命令为tomcat:redeploy -->
+		        <version>2.2</version>
+		      <configuration>
+		          <!-- <url>http://localhost:8080/manager</url> -->            <!-- tomcat6部署管理路径 -->
+		          <url>http://localhost:8080/manager/text</url>                <!-- tomcat7部署管理路径 -->
+		          <username>admin</username>                                <!-- tomcat的管理员账号 -->
+		          <password>admin</password>
+		          <port>80</port>
+		          <path>/cas</path>                            <!-- 部署路径 -->
+		          <charset>UTF-8</charset>
+		          <encoding>UTF-8</encoding>
+		          <!-- 运行redeploy命令前，要能正常访问http://localhost:8080/manager-->
+		      </configuration>
+		      </plugin>
+		</plugins>
+		<finalName>cas</finalName>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-webapp${app.server}</artifactId>
+			<version>${cas.version}</version>
+			<type>war</type>
+			<scope>runtime</scope>
+			<exclusions>
+      <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
+      </exclusion>
+  </exclusions>
+		</dependency>
+
+		<!--json服务注册 -->
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-json-service-registry</artifactId>
+			<version>${cas.version}</version>
+			<exclusions>
+      <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
+      </exclusion>
+  </exclusions>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax.servlet</groupId> -->
+<!-- 			<artifactId>javax.servlet-api</artifactId> -->
+<!-- 			<version>4.0.0</version> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax.servlet</groupId> -->
+<!-- 			<artifactId>jstl</artifactId> -->
+<!-- 			<version>1.2</version> -->
+<!-- 		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-support-jdbc -->
+<dependency>
+    <groupId>org.apereo.cas</groupId>
+    <artifactId>cas-server-support-jdbc</artifactId>
+    <version>${cas.version}</version>
+</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-support-jdbc-drivers -->
+<dependency>
+    <groupId>org.apereo.cas</groupId>
+    <artifactId>cas-server-support-jdbc-drivers</artifactId>
+    <version>${cas.version}</version>
+    <scope>runtime</scope>
+</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-support-generic -->
+<dependency>
+    <groupId>org.apereo.cas</groupId>
+    <artifactId>cas-server-support-generic</artifactId>
+    <version>${cas.version}</version>
+    <scope>test</scope>
+</dependency>
+		
+	</dependencies>
+
+	<properties>
+		<cas.version>5.2.2</cas.version>
+		<springboot.version>1.5.8.RELEASE</springboot.version>
+		<!-- app.server could be -jetty, -undertow, -tomcat, or blank if you plan 
+			to provide appserver -->
+		<app.server>-tomcat</app.server>
+
+		<mainClassName>org.springframework.boot.loader.WarLauncher</mainClassName>
+		<isExecutable>false</isExecutable>
+		<manifestFileToUse>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp${app.server}/META-INF/MANIFEST.MF</manifestFileToUse>
+
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<profiles>
+		<profile>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<id>exec</id>
+			<properties>
+				<mainClassName>org.apereo.cas.web.CasWebApplication</mainClassName>
+				<isExecutable>true</isExecutable>
+				<manifestFileToUse></manifestFileToUse>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.soebes.maven.plugins</groupId>
+						<artifactId>echo-maven-plugin</artifactId>
+						<version>0.3.0</version>
+						<executions>
+							<execution>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>echo</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<echos>
+								<echo>Executable profile to make the generated CAS web
+									application executable.</echo>
+							</echos>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
