@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd ">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+	http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.apereo.cas</groupId>
 	<artifactId>cas-overlay</artifactId>
@@ -54,26 +54,20 @@
 				<version>3.3</version>
 			</plugin>
 			<plugin>
-		          <!-- 3个可用插件 -->
-<!-- 		        <groupId>org.apache.tomcat.maven</groupId> -->
-<!-- 		        <artifactId>tomcat6-maven-plugin</artifactId>                    命令为tomcat6:redeploy -->
-		        <groupId>org.apache.tomcat.maven</groupId>
-		        <artifactId>tomcat7-maven-plugin</artifactId>    <!-- 命令为tomcat7:redeploy -->
-		        <!-- <groupId>org.codehaus.mojo</groupId> -->
-		        <!-- <artifactId>tomcat-maven-plugin</artifactId> -->        <!-- 命令为tomcat:redeploy -->
-		        <version>2.2</version>
-		      <configuration>
-		          <!-- <url>http://localhost:8080/manager</url> -->            <!-- tomcat6部署管理路径 -->
-		          <url>http://localhost:8080/manager/text</url>                <!-- tomcat7部署管理路径 -->
-		          <username>admin</username>                                <!-- tomcat的管理员账号 -->
-		          <password>admin</password>
-		          <port>80</port>
-		          <path>/cas</path>                            <!-- 部署路径 -->
-		          <charset>UTF-8</charset>
-		          <encoding>UTF-8</encoding>
-		          <!-- 运行redeploy命令前，要能正常访问http://localhost:8080/manager-->
-		      </configuration>
-		      </plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>    <!-- 命令为tomcat7:redeploy -->
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>                <!-- tomcat7部署管理路径 -->
+					<username>admin</username>                                <!-- tomcat的管理员账号 -->
+					<password>admin</password>
+					<port>80</port>
+					<path>/cas</path>                            <!-- 部署路径 -->
+					<charset>UTF-8</charset>
+					<encoding>UTF-8</encoding>
+					<!-- 运行redeploy命令前，要能正常访问http://localhost:8080/manager -->
+				</configuration>
+			</plugin>
 		</plugins>
 		<finalName>cas</finalName>
 	</build>
@@ -85,11 +79,11 @@
 			<type>war</type>
 			<scope>runtime</scope>
 			<exclusions>
-      <exclusion>
-          <groupId>javax.servlet</groupId>
-          <artifactId>servlet-api</artifactId>
-      </exclusion>
-  </exclusions>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!--json服务注册 -->
@@ -98,25 +92,13 @@
 			<artifactId>cas-server-support-json-service-registry</artifactId>
 			<version>${cas.version}</version>
 			<exclusions>
-      <exclusion>
-          <groupId>javax.servlet</groupId>
-          <artifactId>servlet-api</artifactId>
-      </exclusion>
-  </exclusions>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>javax.servlet</groupId> -->
-<!-- 			<artifactId>javax.servlet-api</artifactId> -->
-<!-- 			<version>4.0.0</version> -->
-<!-- 			<scope>provided</scope> -->
-<!-- 		</dependency> -->
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>javax.servlet</groupId> -->
-<!-- 			<artifactId>jstl</artifactId> -->
-<!-- 			<version>1.2</version> -->
-<!-- 		</dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -129,33 +111,29 @@
 			<scope>runtime</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-support-jdbc -->
-<dependency>
-    <groupId>org.apereo.cas</groupId>
-    <artifactId>cas-server-support-jdbc</artifactId>
-    <version>${cas.version}</version>
-</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-support-jdbc-drivers -->
-<dependency>
-    <groupId>org.apereo.cas</groupId>
-    <artifactId>cas-server-support-jdbc-drivers</artifactId>
-    <version>${cas.version}</version>
-    <scope>runtime</scope>
-</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apereo.cas/cas-server-support-generic -->
-<dependency>
-    <groupId>org.apereo.cas</groupId>
-    <artifactId>cas-server-support-generic</artifactId>
-    <version>${cas.version}</version>
-    <scope>test</scope>
-</dependency>
-		
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-jdbc</artifactId>
+			<version>${cas.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-jdbc-drivers</artifactId>
+			<version>${cas.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-generic</artifactId>
+			<version>${cas.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<properties>
 		<cas.version>5.2.2</cas.version>
 		<springboot.version>1.5.8.RELEASE</springboot.version>
-		<!-- app.server could be -jetty, -undertow, -tomcat, or blank if you plan 
-			to provide appserver -->
 		<app.server>-tomcat</app.server>
 
 		<mainClassName>org.springframework.boot.loader.WarLauncher</mainClassName>
