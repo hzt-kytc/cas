@@ -8,8 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title th:text="${#themes.code('pageTitle')}"></title>
     <link rel="stylesheet" th:href="@{${#themes.code('css.file')}}" />
+    <script type="text/javascript">
+ 		//解决在iframe下因Session登陆超时问题，导致iframe页面嵌套登陆界面
+        $(function (){
+            if(window != top)
+            	top.location.href =location.href;
+        });
+     </script>
 </head>
-
 <body>
 <body>
     <div class="mainBody">
